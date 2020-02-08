@@ -1,4 +1,4 @@
-// +-------------------------------------------------------------------------
+﻿// +-------------------------------------------------------------------------
 // | empty3d.cpp
 // | 
 // | Author: Gilbert Bernstein
@@ -372,7 +372,7 @@ const double SMALL_NUM  = 1.0e-8; // to avoid division overflow
 	//Find lambda and mu such that:
 	//A = p0+lambda(p1-p0)
 	//B = p2+mu(p3-p2)
-	//(lambda, mu) = argmin(||A-B||�)
+	//(lambda, mu) = argmin(||A-B||²)
 	Vec3d p02 = A0-B0;
 	Vec3d p32 = B1-B0;
 	Vec3d p10 = A1-A0;
