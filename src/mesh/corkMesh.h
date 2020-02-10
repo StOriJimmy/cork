@@ -75,3 +75,29 @@ struct CorkTriangle :
 typedef Mesh<CorkVertex, CorkTriangle> CorkMesh;
 typedef RawMesh<CorkVertex, CorkTriangle> RawCorkMesh;
 
+#ifndef CORK_API
+#ifndef USE_CORK_AS_LIB
+#if defined wincork2017_EXPORTS
+#define CORK_API __declspec(dllexport)
+#else
+#define CORK_API __declspec(dllimport)
+#endif
+#else
+#define CORK_API
+#endif
+#endif // CORK_API
+
+CORK_API bool isSolid(CorkMesh& mesh);
+
+// Boolean operations follow
+// result = A U B
+CORK_API void computeUnion(CorkMesh& in0, CorkMesh& in1);
+
+// result = A - B
+CORK_API void computeDifference(CorkMesh& in0, CorkMesh& in1);
+
+// result = A ^ B
+CORK_API void computeIntersection(CorkMesh& in0, CorkMesh& in1);
+
+// result = A XOR B
+CORK_API void computeSymmetricDifference(CorkMesh& in0, CorkMesh& in1);

@@ -106,25 +106,47 @@ void corkMesh2CorkTriMesh(
 	}
 }
 
+bool isSolid(CorkMesh& mesh)
+{
+	bool solid = true;
+	if (mesh.isSelfIntersecting()) {
+		CORK_ERROR("isSolid() was given a self-intersecting mesh");
+		solid = false;
+	}
+
+	if (!mesh.isClosed()) {
+		CORK_ERROR("isSolid() was given a non-closed mesh");
+		solid = false;
+	}
+	return solid;
+}
+
+void computeUnion(CorkMesh& in0, CorkMesh& in1)
+{
+	in0.boolUnion(in1);
+}
+
+void computeDifference(CorkMesh& in0, CorkMesh& in1)
+{
+	in0.boolDiff(in1);
+}
+
+void computeIntersection(CorkMesh& in0, CorkMesh& in1)
+{
+	in0.boolIsct(in1);
+}
+
+void computeSymmetricDifference(CorkMesh& in0, CorkMesh& in1)
+{
+	in0.boolXor(in1);
+}
 
 bool isSolid(CorkTriMesh cmesh)
 {
     CorkMesh mesh;
     corkTriMesh2CorkMesh(cmesh, &mesh);
-    
-    bool solid = true;
-    
-    if(mesh.isSelfIntersecting()) {
-        CORK_ERROR("isSolid() was given a self-intersecting mesh");
-        solid = false;
-    }
-    
-    if(!mesh.isClosed()) {
-        CORK_ERROR("isSolid() was given a non-closed mesh");
-        solid = false;
-    }
-    
-    return solid;
+
+	return isSolid(mesh);
 }
 
 void computeUnion(

@@ -32,7 +32,7 @@
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
@@ -45,7 +45,7 @@
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -104,13 +104,15 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(MPIR)\lib\x64\Debug;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_USE_MATH_DEFINES;NOMINMAX;NO_TIMER;_CRT_SECURE_NO_WARNINGS;TRILIBRARY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Program_Files\mpir-3.0.0\lib\x64\$(Configuration)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_USE_MATH_DEFINES;NOMINMAX;NO_TIMER;_CRT_SECURE_NO_WARNINGS;TRILIBRARY;wincork2017_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalOptions>mpir.lib %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalLibraryDirectories>D:\Program_Files\mpir-3.0.0\lib\x64\Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>D:\Program_Files\gmp\x64\lib\libgmp-10.lib;D:\Program_Files\gmp\x64\lib\libmpfr-4.lib;D:\Program_Files\mpir-3.0.0\lib\x64\Debug\mpir.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -134,17 +136,21 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(MPIR)\lib\x64\Release;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_USE_MATH_DEFINES;NOMINMAX;NO_TIMER;_CRT_SECURE_NO_WARNINGS;TRILIBRARY;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Program_Files\mpir-3.0.0\lib\x64\$(Configuration)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_USE_MATH_DEFINES;NOMINMAX;NO_TIMER;_CRT_SECURE_NO_WARNINGS;TRILIBRARY;NDEBUG;wincork2017_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
+      <AdditionalDependencies>D:\Program_Files\gmp\x64\lib\libgmp-10.lib;D:\Program_Files\gmp\x64\lib\libmpfr-4.lib;D:\Program_Files\mpir-3.0.0\lib\x64\$(Configuration)\mpir.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\accel\aabvh.h" />
+    <ClInclude Include="..\..\src\cork.h" />
     <ClInclude Include="..\..\src\file_formats\files.h" />
     <ClInclude Include="..\..\src\isct\absext4.h" />
     <ClInclude Include="..\..\src\isct\empty3d.h" />
@@ -158,6 +164,7 @@
     <ClInclude Include="..\..\src\math\bbox.h" />
     <ClInclude Include="..\..\src\math\ray.h" />
     <ClInclude Include="..\..\src\math\vec.h" />
+    <ClInclude Include="..\..\src\mesh\corkMesh.h" />
     <ClInclude Include="..\..\src\mesh\mesh.decl.h" />
     <ClInclude Include="..\..\src\mesh\mesh.h" />
     <ClInclude Include="..\..\src\rawmesh\rawMesh.h" />
@@ -176,6 +183,7 @@
     <None Include="..\..\src\rawmesh\rawMesh.tpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\cork.cpp" />
     <ClCompile Include="..\..\src\file_formats\files.cpp" />
     <ClCompile Include="..\..\src\file_formats\ifs.cpp" />
     <ClCompile Include="..\..\src\file_formats\off.cpp" />
